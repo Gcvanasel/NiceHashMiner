@@ -17,6 +17,7 @@ using NiceHashMiner.Interfaces;
 using NiceHashMiner.Forms.Components;
 using NiceHashMiner.Utils;
 using NiceHashMiner.PInvoke;
+using Grapevine.Server;
 
 using SystemTimer = System.Timers.Timer;
 using Timer = System.Windows.Forms.Timer;
@@ -59,6 +60,8 @@ namespace NiceHashMiner
         int MainFormHeight = 0;
         int EmtpyGroupPanelHeight = 0;
 
+        RestServer APIServer;
+
         public Form_Main()
         {
             InitializeComponent();
@@ -97,6 +100,10 @@ namespace NiceHashMiner
                 MainFormHeight = 330 - EmtpyGroupPanelHeight;
             }
             ClearRatesALL();
+
+            APIServer = new RestServer();
+            APIServer.Advanced.AuthenticationSchemes = System.Net.AuthenticationSchemes.Digest;
+            APIServer.LogToConsole().Start();
         }
 
         private void InitLocalization() {
