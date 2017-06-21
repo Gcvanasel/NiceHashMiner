@@ -14,7 +14,7 @@ namespace NiceHashMiner.Web.Models
         public string AlgorithmName;
         public double Speed;
         public AlgorithmType SecondaryNiceHashID;
-        public string SecondaryAlgorithmName;
+        public string SecondaryAlgorithmName = "";
         public double SecondarySpeed;
         public double Rate;
 
