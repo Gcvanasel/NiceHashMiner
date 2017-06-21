@@ -7,9 +7,11 @@ using System.Text;
 using NiceHashMiner.Miners.Grouping;
 using NiceHashMiner.Configs;
 using System.IO;
+using System.Linq;
 
 using Timer = System.Timers.Timer;
 using System.Timers;
+using NiceHashMiner.Web.Models;
 
 namespace NiceHashMiner.Miners {
     using GroupedDevices = SortedSet<string>;
@@ -41,6 +43,8 @@ namespace NiceHashMiner.Miners {
         private Timer _preventSleepTimer;
         // check internet connection 
         private Timer _internetCheckTimer;
+
+        private List<GroupMinerStatus> runningGroupStatuses;
         
 
         public bool IsMiningEnabled {
@@ -417,6 +421,7 @@ namespace NiceHashMiner.Miners {
         public void MinerStatsCheck(Dictionary<AlgorithmType, NiceHashSMA> NiceHashData) {
             double CurrentProfit = 0.0d;
             _mainFormRatesComunication.ClearRates(_runningGroupMiners.Count);
+            var status = new List<GroupMinerStatus>();
             foreach (var groupMiners in _runningGroupMiners.Values) {
                 Miner m = groupMiners.Miner;
 
@@ -439,9 +444,15 @@ namespace NiceHashMiner.Miners {
                     AD = new APIData(groupMiners.AlgorithmType);
                 }
                 CurrentProfit += groupMiners.CurrentRate;
+                status.Add(new GroupMinerStatus(m.MinerTAG(), groupMiners.DevicesInfoString, AD, groupMiners.CurrentRate, m.IsAPIReadException));
                 // Update GUI
                 _mainFormRatesComunication.AddRateInfo(m.MinerTAG(), groupMiners.DevicesInfoString, AD, groupMiners.CurrentRate, m.IsAPIReadException);
             }
+            runningGroupStatuses = status;
+        }
+
+        public List<GroupMinerStatus> GetMinerStats() {
+            return runningGroupStatuses;
         }
 
     }

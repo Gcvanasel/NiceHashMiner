@@ -102,7 +102,6 @@ namespace NiceHashMiner
             ClearRatesALL();
 
             APIServer = new RestServer();
-            APIServer.Advanced.AuthenticationSchemes = System.Net.AuthenticationSchemes.Digest;
             APIServer.LogToConsole().Start();
         }
 

@@ -7,6 +7,7 @@ using NiceHashMiner.Interfaces;
 using NiceHashMiner.Configs;
 using NiceHashMiner.Devices;
 using NiceHashMiner.Enums;
+using NiceHashMiner.Web.Models;
 
 namespace NiceHashMiner.Miners {
     using NiceHashMiner.Miners.Grouping;
@@ -63,6 +64,11 @@ namespace NiceHashMiner.Miners {
 
         public static void MinerStatsCheck(Dictionary<AlgorithmType, NiceHashSMA> NiceHashData) {
             if (CurMiningSession != null) CurMiningSession.MinerStatsCheck(NiceHashData);
+        }
+
+        public static List<GroupMinerStatus> GetGroupMinerStatuses() {
+            if (CurMiningSession != null) return CurMiningSession.GetMinerStats();
+            return new List<GroupMinerStatus>();
         }
     }
 }
