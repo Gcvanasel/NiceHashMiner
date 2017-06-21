@@ -17,6 +17,7 @@ namespace NiceHashMiner.Web.Models
         public string SecondaryAlgorithmName = "";
         public double SecondarySpeed;
         public double Rate;
+        public string DeviceString;
 
         public APIGroupMinerStatus(APIData apiData, double rate) {
             NiceHashID = apiData.AlgorithmID;

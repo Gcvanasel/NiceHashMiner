@@ -274,6 +274,7 @@
     <Compile Include="Utils\MinersDownloadManager.cs" />
     <Compile Include="Utils\MinersExistanceChecker.cs" />
     <Compile Include="Web\APIListener.cs" />
+    <Compile Include="Web\Models\APIDevice.cs" />
     <Compile Include="Web\Models\APIGroupMinerStatus.cs" />
     <Compile Include="Web\Models\GroupMinerStatus.cs" />
     <EmbeddedResource Include="Forms\Components\AlgorithmsListView.resx">
